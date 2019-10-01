@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    background-size: cover;
+    background-position: centre;
+}
+.startBox {
+    width: 100%;
+    height: device-width;
+    background: rgb(0, 0, 0);
+    color: #000;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+}
+.startBox .companyLogo {
+    width:260px;
+    height:180px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+}
+
+.startBox .question {
+    height: 40px;
+    text-align: center;
+    margin-top: 60px; 
+  }
+  
+.startBox .question p {
+    color:#fff;
+}
+
+.startBox .buttons{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.startBox .bottle {
+    width:260px;
+    height:180px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    vertical-align: bottom;
+}

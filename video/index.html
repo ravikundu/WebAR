@@ -2,150 +2,30 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="indexCss.css">
     </head>
     <style>
-    
-    img {
-        opacity: 0.5;
-        filter: alpha(opacity=50); /* For IE8 and earlier */
-    }
-
-    </style>
-    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
-    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script>
-        var vid = document.getElementById("vid"); 
-
-        function playVid() { 
-        vid.play(); 
-        } 
-
-        function pauseVid() { 
-        vid.pause(); 
-        }
-
-        // AFRAME.registerComponent('vidhandler', {
-        //     init: function () {
-        //         this.toggle = false;
-        //         document.querySelector("#vid").pause(); //reference to the video
-        //     },
-        //     tick:function(){  
-        //     if(document.querySelector("a-marker").object3D.visible  == true){
-        //         if(!this.toggle){
-        //         this.toggle = true;
-        //         document.querySelector("#vid").play();
-        //         console.log("playing video.")
-        //         }
-        //     }else{
-        //         this.toggle = false;
-        //         document.querySelector("#vid").pause();
-        //         console.log("video stopped.")
-        //     }
-        //     }
-        // });
-
-        AFRAME.registerComponent('registerevents', {
-            init: function () {
-                var marker = this.el;
-
-                marker.addEventListener('markerFound', function() {
-                    document.getElementById("scanner").style.display = "none";
-                    var markerId = marker.id;
-                    document.getElementById("vid").play();
-                    
-                    console.log('markerFound', markerId);
-                    // TODO: Add your own code here to react to the marker being found.
-                });
-
-                marker.addEventListener('markerLost', function() {
-                    document.getElementById("scanner").style.display = "initial";
-                    var markerId = marker.id;
-                    document.getElementById("vid").pause();
-                    
-                    console.log('markerLost', markerId);
-                    // TODO: Add your own code here to react to the marker being lost.
-                });
-            }
-        });
-
-        AFRAME.registerComponent('cursor-listener', {
-
-            init: function () {
-                this.play = false;
-                this.el.addEventListener('click', function (evt) {
-                    if(!this.play){
-                        document.querySelector("#vid").play();
-                        console.log(document.getElementById("vid").currentTime);
-                        console.log("video playing.")
-                        this.play = true;
-                    }else{
-                        document.querySelector("#vid").pause();
-                        this.play = false;
-                        console.log("video stopped.")
-                    }
-                    
-                });
-                this.el.addEventListener('playing', function(evt){
-                    if(document.getElementById("vid").currentTime > 5){
-                        console.log("video ended");
-                    }
-                });
-            }
-        });
-        function playEnded() {
-
-            window.open("index02.html","_self");
-            
-            // var conf = confirm("You have won free tickets. Press OK to collect!");
-
-            // if (conf == true) {
-            //     window.open("index02.html","_self");
-            // } else {
-            //     document.getElementById("vid").currentTime=0;
-            //     alert("The Video is ready to be played again.");
-            // }
-        };
         
+    </style>
+    <script>
+        function nextPage(){
+            window.open("index02.html","_self");
+        }
     </script>
     <body style="margin : 0px; overflow: hidden;">
         
-        <a>
-            <img id="scanner" src="scanner-2.png" style="filter: alpha(opacity=50); width: 100%; height: 100%; position: center;" >
-        </a>
-
-        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-        <a-scene embedded arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
-        <a-assets>
-                <img id="image" src="test.jpeg">
-                <video id="vid" onended="playEnded()">
-                    <!--<source src="video01.webm" type='video/webm; codecs="vp8.0, vorbis"'>-->
-                    <source src="video01.ogv" type='video/ogg; codecs="theora, vorbis"'>
-                    <source src="video01.mp4" type='video/mp4; codecs="avc1.4D401E, mp4a.40.2"'>
-                </video>
-        </a-assets>
-        
-        <a-marker type="pattern" preset="custom" url="pattern-qrcode.patt" registerevents>
-            <a-video cursor-listener position="0 0 -1.5" src="#vid" rotation="-90 0 0"></a-video>
-            <a-image width="1" height="1" position="0 0 -1" src="#image"></a-image>
-        </a-marker>
-
-        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker>-->
-        <a-camera style="z-index: 1;">
-            <!--<a-cursor color="#FF0000" width="0.1" height="0.1"></a-cursor>-->
-        </a-camera>    
-        <!--<a-entity camera look-controls>
-            <a-entity cursor="fuse: true; fuseTimeout: 500"
-                      position="0 0 -1"
-                      geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                      material="color: black; shader: flat">
-            </a-entity>
-        </a-entity>-->
-
-        </a-scene>
-
-        <!-- <div style="position: fixed; vertical-align: bottom; width:100%; text-align: center; z-index: 2;">
-            <button onclick="playVid()" type="button">Play</button> 
-        </div> -->
+        <div class="startBox">
+            <img class="companyLogo" src="companyLogo.png" >
+            <div class="question">
+                <p>Are you of Legal Drinking Age<br>
+                   as per your local laws ?</p>
+            </div>
+            <div class="buttons">
+                <input class="yes" type="image" src="yesButton.png" alt="button" width="90" height="40" onclick="nextPage()">
+                <input class="no" type="image" src="noButton.png" alt="button" width="90" height="40">
+            </div>
+            <img class="bottle" src="bottle.png" >
+        </div>
 
     </body>
 </html>
